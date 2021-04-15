@@ -26,11 +26,14 @@ syntypes = ['alltree', 'local_regular', 'global_regular_lrand', 'global_regular_
 
 data.model = 'CA1' # L23 or CA1
 data.stimType = 'place' # poisson, place, replay, minis, nIter, SStim, DStim
-data.synType = 'clust2' # synapse distribution - NULL, single, alltree, clustered, clust2, local_regular, global_regular_lrand, global_regular_lreg, clust2
+data.synType = 'alltree' # synapse distribution - NULL, single, alltree, clustered, clust2, local_regular, global_regular_lrand, global_regular_lreg, clust2
 # data.synType = syntypes[PAR1-1] # synapse distribution
 data.actType = 'aDend' # passive, aSoma, aDend, active 
 if (data.model == 'L23' and data.stimType == 'replay' and data.synType == 'clust2'):
 	data.synType = 'clust3'
+
+Nclusts = np.array([4])
+Nsyn_per_clusts = np.array([60])
 
 # 1min 20s / 10s simulation for active
 # 30s / 10s simulation for passive
@@ -47,7 +50,7 @@ data.iden = 5
 data.randClust = False # randomize location of clustered synapses within the branch
 
 data.constNMDA = False # if TRUE we use voltage independent NMDA receptors
-data.modulateNa = False # True or False - switch off the Na in the branches
+data.modulateNa = True # True or False - switch off the Na in the branches
 
 ## only when data.stimType = 'place'
 data.placeType = 'random_NR' # balanced, random_N (number of neurons), random_NR (number and peak firing rate)
@@ -67,7 +70,7 @@ data.SHOWSYNS = False
 
 ### number of iterations - only when data.stimType = 'place'
 ### this corresponds to different trials with identical synapses
-data.nIter = 16 # max is usually 16
+data.nIter = 651 # max is usually 16
 ### time parameters
 data.TSTOP = 10
 if (data.model == 'L23'): data.TSTOP = 24
@@ -92,9 +95,9 @@ data.g_factor = 1 # all synapses are scaled with this factor
 Nclusts = np.array([4, 8, 12, 24, 48, 120, 240])
 Nsyn_per_clusts = np.array([60, 30, 20, 10, 5, 2, 1])
 #Nclusts = np.array([500, 1000, 2000]) # use this only if all synapses are clustered in CA1
-Nclusts = np.array([100, 250, 500, 1000]) # use this only if all synapses are clustered in CA1
+#Nclusts = np.array([25]) # use this only if all synapses are clustered in CA1
 # Nclusts = np.array([480, 960, 1920]) # use this only if all synapses are clustered in L23
-Nsyn_per_clusts = np.array([10, 4, 2, 1])
+#Nsyn_per_clusts = np.array([20])
 # data.Lmin = 5
 
 Nclust = Nclusts[PAR1-1]
@@ -459,7 +462,7 @@ if data.SAVE:
 	if ((data.stimType == 'SStim') + (data.stimType == 'DStim')):
 		outdir = './' + data.model + '/' + data.stimType + '/' + data.actType
 	import cell_save as cs
-	cs.save_sim(data, out_binary=True, out_vdend=True, out_pickle=False, outdir=outdir, dt_save=1)
+	cs.save_sim(data, out_binary=True, out_vdend=True, out_pickle=False, outdir=outdir, dt_save=0.2)
 
 # #----------------------------------------------------------------------------
 # # show the synapses

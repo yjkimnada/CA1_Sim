@@ -177,10 +177,13 @@ def save_sim(data, out_binary=True, out_vdend=True, out_pickle=False, outdir='da
         else :
             Locs = np.array(data.Elocs)
 
+        np.save('./'+outdir+'/Elocs_'+filename+'.npy', Elocs)
+        np.save('./'+outdir+'/Ilocs_'+filename+'.npy', Ilocs)
+
         #bfname = './'+outdir+'/synlocs_'+filename+'.bin'
-        bfname = './'+outdir+'/synlocs_'+filename+'.npy'
-        print (bfname)
-        np.save(bfname, Locs)
+        #bfname = './'+outdir+'/synlocs_'+filename+'.npy'
+        #print (bfname)
+        #np.save(bfname, Locs)
 
         """
         # create a binary file

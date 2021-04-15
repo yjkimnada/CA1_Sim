@@ -10,7 +10,7 @@ def rotate(x,z,theta):
     z2 =  z * np.cos(theta) - x * np.sin(theta)
     return [x2, z2]
 
-def plot_syns(data, model, plotInh=False, iB=[]):
+def plot_syns(data, model, plotInh=False, iB=[], Nclust):
     #----------------------------------------------------------------------------
     # Some parameters
     nsyn = data.Ensyn
@@ -81,7 +81,7 @@ def plot_syns(data, model, plotInh=False, iB=[]):
 
     #----------------------------------------------------------------------------
     # Make plot
-    plt.figure(figsize=(8,8))
+    fig = plt.figure(figsize=(8,8))
     # Cell
     for pt in np.arange(len(cell_coordinates)):
         xstart, xend = cell_coordinates[pt][0], cell_coordinates[pt][1]
@@ -214,5 +214,9 @@ def plot_syns(data, model, plotInh=False, iB=[]):
     # L23 - all
     # plt.xlim(-220,200)
     # plt.ylim(-150,250)
-    plt.show(block=False)
+    #plt.show(block=False)
+
+    plt.axis("off")
+    fig.tight_layout()
+    plt.savefig("/users/yjkimnada/CA1_Sim/new_biophysical/CA1_clust"+str(Nclust)+".pdf", bbox_inches="tight")
             

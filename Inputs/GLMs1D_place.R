@@ -2,18 +2,19 @@
 
 source('./Functions/gen_cells.R', chdir=T) # load the required functions - essentially simulating GLMs in R
 
-Ensyn <- 2000; Insyn=200; Ntrial <- 16; Erate <- 1; Irate=7.5; dt <- 0.001; Erate.bg <- 1 # these are the original parameters
+Ensyn <- 2000; Insyn=200; Ntrial <- 1000; Erate <- 0.5; Irate=7.4; dt <- 0.001; Erate.bg <- 0.1 # these are the original parameters
+#Ensyn <- 2000; Insyn=200; Ntrial <- 651; Erate <- 1; Irate=7.5; dt <- 0.001; Erate.bg <- 1
 types <- c("balanced", "random_NR")
 rseed <- 1 # set rseed to the random seed 1-10
 itype <- 2 # set itype to 1 (balanced) or 2 (random)
 
-graphics <- T
+graphics <- F
 
 ### we change a few parameters to speed up the demo
 ### comment this out if you want to replicate the original inputs
-Ensyn <- 40 
-Insyn <- 10
-Ntrial <- 4
+#Ensyn <- 40 
+#Insyn <- 10
+#Ntrial <- 4
 
 
 # loading w.template for phase precession - fitted to Skaggs et al., 1996

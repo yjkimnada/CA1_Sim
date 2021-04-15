@@ -1,7 +1,7 @@
 
 #----------------------------------------------------------------------------
 # Simulation general parameters
-data.dt = 1
+data.dt = 0.2
 lb.h.dt = data.dt
 lb.h.steps_per_ms = 1.0/lb.h.dt
 data.recordDend = True

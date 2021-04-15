@@ -9,7 +9,7 @@ import libcell as lb
 import saveClass as sc
 
 
-PAR1 = 1 # controls the level of clustering
+PAR1 = 0 # controls the level of clustering
 PAR2 = 0 # controls the random seed
 
 #----------------------------------------------------------------------------
@@ -19,13 +19,13 @@ data.vdata, data.vDdata, data.Gdata, data.Idata, data.stim = [], [], [], [], []
 
 #----------------------------------------------------------------------------
 # Simulation CONTROL
-data.SAVE = True # save the results of the simulations into file
+data.SAVE = False # save the results of the simulations into file
 data.SHOWTRACES = False # plot the input and the dendritic and somatic voltage traces
-data.SHOWSYNS = False # show the morphology of the cell with the location of the synapses
+data.SHOWSYNS = True # show the morphology of the cell with the location of the synapses
 
 ### number of iterations - only when data.stimType = 'place'
 ### this corresponds to different trials with identical synapses
-data.nIter = 16 # max is usually 16, may not work propely with < 2
+data.nIter = 1 # max is usually 16, may not work propely with < 2
 data.TSTOP = 10
 
 #---------------------------------------------------------------------------
@@ -213,7 +213,7 @@ if data.SAVE:
         outdir = './' + data.model + '/' + data.synType + '/' + data.stimType + '/' + data.actType
 
     import cell_save as cs
-    cs.save_sim(data, out_binary=True, out_vdend=True, out_pickle=False, outdir=outdir, dt_save=1.0)
+    cs.save_sim(data, out_binary=True, out_vdend=True, out_pickle=False, outdir=outdir, dt_save=0.2)
 
 # #----------------------------------------------------------------------------
 # # show the synapses
@@ -222,11 +222,11 @@ if data.SHOWSYNS:
     print ('plotting the cell with the synapses ...')
     import cell_draw as cd
     if ((data.stimType=='nIter')) :
-        cd.plot_syns(data, model, False)
+        cd.plot_syns(data, model, False, [], Nclust)
     else : 
         if (data.stimType == 'replay'): 
             iB = range(data.Ensyn-Nclust*Ncell_per_clust,data.Ensyn)
         else :
             iB = []
-        cd.plot_syns(data, model, True, iB)
+        cd.plot_syns(data, model, True, iB, Nclust)
 
